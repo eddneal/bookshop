@@ -3,11 +3,22 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "NODE_ENV=test jest"
   },
   "dependencies": {
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^23.0.1",
     "next": "^6.0.3",
     "react": "^16.4.0",
     "react-dom": "^16.4.0"
+  },
+  "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^23.1.0",
+    "jest-enzyme": "^6.0.1",
+    "react-test-renderer": "^16.4.1",
+    "react-addons-test-utils": "^15.6.2"
   }
 }

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`With Snapshot Testing App shows "Welcome to Bookshop" 1`] = `
+<div
+  className="jsx-1170399346"
+>
+  <div
+    className="jsx-1170399346 hero"
+  >
+    <h1
+      className="jsx-1170399346 title"
+    >
+      Welcome to Bookshop
+    </h1>
+  </div>
+</div>
+`;
