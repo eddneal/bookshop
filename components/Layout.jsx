@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Head from './Head';
+import Footer from './Footer';
 
 const Layout = props => (
   <div>
@@ -9,6 +10,7 @@ const Layout = props => (
     <main>
       {props.children}
     </main>
+    <Footer />
     <style jsx>{`
     main {
       padding: 60px 30px;
