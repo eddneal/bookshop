@@ -1,7 +1,8 @@
 import React from 'react';
+import Layout from '../components/Layout';
 
 export default () => (
-  <div>
+  <Layout page="Home">
     <div className="hero">
       <h1 className="title">Welcome to Bookshop</h1>
     </div>
@@ -18,5 +19,5 @@ export default () => (
       font-size: 48px;
     }
   `}</style>
-  </div>
+  </Layout>
 );
