@@ -2,16 +2,29 @@
 
 exports[`With Snapshot Testing App shows "Welcome to Bookshop" 1`] = `
 <div
-  className="jsx-1170399346"
+  className="jsx-692796799"
 >
-  <div
-    className="jsx-1170399346 hero"
+  <main
+    className="jsx-692796799"
   >
-    <h1
-      className="jsx-1170399346 title"
+    <div
+      className="jsx-3246231511 hero"
     >
-      Welcome to Bookshop
-    </h1>
-  </div>
+      <h1
+        className="jsx-3246231511 title"
+      >
+        Welcome to Bookshop
+      </h1>
+    </div>
+  </main>
+  <footer
+    className="jsx-3218118659"
+  >
+    <p
+      className="jsx-3218118659"
+    >
+      Copyright © Bookshop 2018
+    </p>
+  </footer>
 </div>
 `;
