@@ -1,16 +1,18 @@
 {
   "name": "create-next-example-app",
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
     "test": "NODE_ENV=test jest"
   },
   "dependencies": {
     "@zeit/next-css": "^0.2.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.0.1",
+    "express": "^4.16.3",
     "next": "^6.0.3",
+    "next-routes": "^1.4.2",
     "prop-types": "^15.6.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
