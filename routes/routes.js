@@ -6,6 +6,11 @@ const definedRoutes = [
     path: '/',
     page: 'index',
   },
+  {
+    name: 'about',
+    path: '/about',
+    page: 'about',
+  },
 ];
 
 definedRoutes.map((route) => {
