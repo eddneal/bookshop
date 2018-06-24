@@ -1,3 +1,6 @@
 {
-  "extends": "airbnb"
+  "extends": "airbnb",
+  "rules": {
+    "jsx-a11y/anchor-is-valid": "off" //allow anchor element without href for Next Link
+  }
 }
