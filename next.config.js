@@ -1,15 +1,15 @@
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   webpack: (config) => {
     // Fixes npm packages that depend on `fs` module
     config.node = {
-      fs: 'empty'
+      fs: 'empty',
     };
 
     config.module.rules.push({
       test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-      loader: 'url-loader?limit=100000'
+      loader: 'url-loader?limit=100000',
     });
 
     config.module.rules.push({
@@ -17,21 +17,21 @@ module.exports = {
       use: [
         {
           loader: 'file-loader',
-          options: {}
-        }
-      ]
+          options: {},
+        },
+      ],
     });
 
     config.module.rules.push({
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
-        fallback: "style-loader",
-        use: "css-loader"
-      })
+        fallback: 'style-loader',
+        use: 'css-loader',
+      }),
     });
 
-    config.plugins.push(new ExtractTextPlugin("static/styles.css"));
+    config.plugins.push(new ExtractTextPlugin('static/styles.css'));
 
     return config;
-  }
+  },
 };
