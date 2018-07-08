@@ -1,6 +1,6 @@
 const request = require('request');
 
-export default (searchTerm = 'harry+potter') => {
+export default (searchTerm = 'william+gibson') => {
   return new Promise((resolve, reject) => {
     request(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`, (err, resp, body) => {
       if (err) return reject(err);

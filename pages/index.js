@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
-import Layout from '../components/Layout';
-import bookSearch from '../api/googleBooksHandler';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-export default class extends Component {
-  static async getInitialProps() {
-    return bookSearch()
-      .then(response => response)
+import Layout from '../components/Layout';
+import { loadItems } from '../store/actions';
+import searchBooks from '../api/googleBooksHandler';
+
+class Home extends Component {
+  static async getInitialProps({store, isServer, pathname, query }) {
+    return searchBooks()
+      .then(response => store.dispatch(loadItems(response.items)))
       .catch(error => console.log(error));
   }
 
   render() {
+    const { items } = this.props;
     return (
       <Layout page="Home">
         <div className="hero">
           <h1 className="title">Welcome to Bookshop</h1>
+          <ul>
+            {items && items.length && items.map(item => (
+              <li key={item.id}>{JSON.stringify(item.volumeInfo.title)}</li>
+              ))
+            }
+          </ul>
         </div>
         <style jsx>{`
             .hero {
@@ -33,3 +44,9 @@ export default class extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+export default connect()(Home);
