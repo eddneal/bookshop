@@ -3,14 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Layout from '../components/Layout';
-import { loadItems } from '../store/actions';
-import searchBooks from '../api/googleBooksHandler';
+import { handleLoadItems } from '../store/actions';
 
 class Home extends Component {
-  static async getInitialProps({store, isServer, pathname, query }) {
-    return searchBooks()
-      .then(response => store.dispatch(loadItems(response.items)))
-      .catch(error => console.log(error));
+  static async getInitialProps({store, req, res, query}) {
+    return store.dispatch(handleLoadItems());
   }
 
   render() {
