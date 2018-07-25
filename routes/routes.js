@@ -11,6 +11,16 @@ const definedRoutes = [
     path: '/about',
     page: 'about',
   },
+  {
+    name: 'search',
+    path: '/search',
+    page: 'search',
+  },
+  {
+    name: 'searchWithKeyword',
+    path: '/search/:keyword',
+    page: 'search',
+  },
 ];
 
 definedRoutes.map((route) => {

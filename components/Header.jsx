@@ -13,6 +13,10 @@ export const navItems = [
     name: 'About',
     route: 'about',
   },
+  {
+    name: 'Search',
+    route: 'search',
+  },
 ];
 
 const Header = props => (
