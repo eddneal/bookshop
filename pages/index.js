@@ -11,17 +11,10 @@ class Home extends Component {
   }
 
   render() {
-    const { items } = this.props;
     return (
       <Layout page="Home">
         <div className="hero">
           <h1 className="title">Welcome to Bookshop</h1>
-          <ul>
-            {items && items.length && items.map(item => (
-              <li key={item.id}>{JSON.stringify(item.volumeInfo.title)}</li>
-              ))
-            }
-          </ul>
         </div>
         <style jsx>{`
             .hero {
@@ -41,9 +34,5 @@ class Home extends Component {
     );
   }
 }
-
-Home.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 export default connect()(Home);
