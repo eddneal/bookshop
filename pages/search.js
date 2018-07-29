@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { handleLoadItems } from '../store/actions';
 import Layout from '../components/Layout';
 import SearchResults from '../components/SearchResults';
-import { handleLoadItems } from '../store/actions';
+import SearchInput from '../components/SearchInput';
 
 class Search extends Component {
   static async getInitialProps({store, req, res, query}) {
@@ -15,6 +16,7 @@ class Search extends Component {
       <Layout page="Search">
         <div className="hero">
           <h1 className="title">Search</h1>
+          <SearchInput />
           <SearchResults />
         </div>
         <style jsx>{`
