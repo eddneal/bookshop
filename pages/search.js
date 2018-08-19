@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { handleLoadItems } from '../store/actions';
+import { handleLoadItems, clearSearch } from '../store/actions';
 import Layout from '../components/Layout';
 import SearchResults from '../components/SearchResults';
 import SearchInput from '../components/SearchInput';
@@ -9,7 +9,9 @@ import PerPageDropdown from '../components/PerPageDropdown';
 
 class Search extends Component {
   static async getInitialProps({store, req, res, query}) {
-    return store.dispatch(handleLoadItems(query.keyword, store.getState().perPage));
+    return (query.keyword) ?
+      store.dispatch(handleLoadItems(query.keyword, store.getState().perPage)) :
+      store.dispatch(clearSearch());
   }
 
   render() {

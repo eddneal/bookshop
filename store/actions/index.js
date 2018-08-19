@@ -19,3 +19,10 @@ export const updatePerPage = (perPage = 10) => ({
   type: 'PER_PAGE_UPDATED',
   perPage,
 });
+
+export const clearSearch = () => ({
+  type: 'SEARCH_CLEAR',
+  searchTerm: '',
+  items: [],
+  loaded: false,
+});

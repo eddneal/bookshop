@@ -6,6 +6,8 @@ const searchItems = (state = { items: [], loading: false, searchTerm: '', perPag
       return { ...state, searchTerm: action.searchTerm };
     case 'PER_PAGE_UPDATED':
       return { ...state, perPage: action.perPage };
+    case 'SEARCH_CLEAR':
+      return { ...state, items: action.items, searchTerm: action.searchTerm, loading: action.loading };
     default:
       return state;
   }
