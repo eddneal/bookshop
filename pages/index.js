@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-
 import Layout from '../components/Layout';
-import { handleLoadItems } from '../store/actions';
 
 class Home extends Component {
-  static async getInitialProps({store, req, res, query}) {
-    return store.dispatch(handleLoadItems());
-  }
-
   render() {
     return (
       <Layout page="Home">
