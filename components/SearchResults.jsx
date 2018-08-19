@@ -3,14 +3,21 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 const SearchResults = props => (
-  <ul className="searchResults">
-    {props.items && props.items.length && props.items.map(item => (
-      <li className="searchResult" key={item.id}>
-        <img className="bookCover" src={item.volumeInfo.imageLinks.thumbnail} alt={item.volumeInfo.title} />
-        <div className="bookTitle">{item.volumeInfo.title}</div>
-      </li>
-    ))
-    }
+  <div>
+    <ul className="searchResults">
+      {props.items.map(item => (
+        <li className="searchResult" key={item.id}>
+          <img className="bookCover" src={item.volumeInfo.imageLinks.thumbnail} alt={item.volumeInfo.title} />
+          <div className="bookTitle">{item.volumeInfo.title}</div>
+        </li>
+      ))}
+    </ul>
+    {(!props.items.length && !props.searchTerm) && (
+      <div>Enter a search term.</div>
+    )}
+    {(!props.items.length && props.searchTerm) && (
+      <div>Your search returned no results, please try another search term.</div>
+    )}
     <style jsx>{`
       .searchResults {
         list-style-type: none;
@@ -33,16 +40,16 @@ const SearchResults = props => (
       }
     `}
     </style>
-  </ul>
+  </div>
 );
 
 SearchResults.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-
 const mapStateToProps = state => ({
   items: state.items,
+  searchTerm: state.searchTerm,
 });
 
 export default connect(mapStateToProps)(SearchResults);
