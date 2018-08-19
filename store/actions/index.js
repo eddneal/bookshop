@@ -6,11 +6,16 @@ export const loadItems = (items = [], loaded = true) => ({
   loaded,
 });
 
-export const handleLoadItems = query => dispatch => searchBooks(query)
+export const handleLoadItems = (query, perPage) => dispatch => searchBooks(query, perPage)
   .then(response => dispatch(loadItems(response.items)))
   .catch(error => console.log(error));
 
 export const updateSearchTerm = (searchTerm = '') => ({
   type: 'SEARCH_TERM_UPDATED',
   searchTerm,
+});
+
+export const updatePerPage = (perPage = 10) => ({
+  type: 'PER_PAGE_UPDATED',
+  perPage,
 });

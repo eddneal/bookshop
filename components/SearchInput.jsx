@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Input, Button } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import { updateSearchTerm, handleLoadItems } from '../store/actions';
-import PropTypes from "prop-types";
 
 const searchInput = (props) => {
   let inputNode;
-  const { setSearchTerm, fetchItems } = props;
+  const { perPage, setSearchTerm, fetchItems } = props;
 
   const searchInputHandler = () => {
     const searchTerm = inputNode.inputRef.value;
     setSearchTerm(searchTerm);
-    fetchItems(searchTerm);
+    fetchItems(searchTerm, perPage);
   };
 
   const enterKeyUpHandler = (e) => {
@@ -41,13 +41,18 @@ const searchInput = (props) => {
 };
 
 searchInput.propTypes = {
+  perPage: PropTypes.number.isRequired,
   setSearchTerm: PropTypes.func.isRequired,
   fetchItems: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
-  setSearchTerm: searchTerm => dispatch(updateSearchTerm(searchTerm)),
-  fetchItems: searchTerm => dispatch(handleLoadItems(searchTerm)),
+const mapStateToProps = state => ({
+  perPage: state.perPage,
 });
 
-export default connect(() => ({}), mapDispatchToProps)(searchInput);
+const mapDispatchToProps = dispatch => ({
+  setSearchTerm: searchTerm => dispatch(updateSearchTerm(searchTerm)),
+  fetchItems: (searchTerm, perPage) => dispatch(handleLoadItems(searchTerm, perPage)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(searchInput);

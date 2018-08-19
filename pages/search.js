@@ -5,10 +5,11 @@ import { handleLoadItems } from '../store/actions';
 import Layout from '../components/Layout';
 import SearchResults from '../components/SearchResults';
 import SearchInput from '../components/SearchInput';
+import PerPageDropdown from '../components/PerPageDropdown';
 
 class Search extends Component {
   static async getInitialProps({store, req, res, query}) {
-    return store.dispatch(handleLoadItems(query.keyword));
+    return store.dispatch(handleLoadItems(query.keyword, store.getState().perPage));
   }
 
   render() {
@@ -17,6 +18,7 @@ class Search extends Component {
         <div className="hero">
           <h1 className="title">Search</h1>
           <SearchInput />
+          <PerPageDropdown />
           <SearchResults />
         </div>
         <style jsx>{`
