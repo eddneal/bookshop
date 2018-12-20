@@ -5,12 +5,16 @@ import PropTypes from 'prop-types';
 const SearchResults = props => (
   <div>
     <ul className="searchResults">
-      {props.items.map(item => (
-        <li className="searchResult" key={item.id}>
-          <img className="bookCover" src={item.volumeInfo.imageLinks.thumbnail} alt={item.volumeInfo.title} />
-          <div className="bookTitle">{item.volumeInfo.title}</div>
-        </li>
-      ))}
+      {props.items.map((item) => {
+        const src = item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.thumbnail
+          ? item.volumeInfo.imageLinks.thumbnail
+          : ''; // TODO: Add fallback image
+        return (
+          <li className="searchResult" key={item.id}>
+            <img className="bookCover" src={src} alt={item.volumeInfo.title} />
+            <div className="bookTitle">{item.volumeInfo.title}</div>
+          </li>);
+      })}
     </ul>
     {(!props.items.length && !props.searchTerm) && (
       <div>Enter a search term.</div>
