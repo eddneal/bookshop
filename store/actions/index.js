@@ -7,7 +7,10 @@ export const loadItems = (items = [], loaded = true) => ({
 });
 
 export const handleLoadItems = (query, perPage) => dispatch => searchBooks(query, perPage)
-  .then(response => dispatch(loadItems(response.items)))
+  .then((response) => {
+    dispatch(loadItems(response.items));
+    dispatch(updateSearchTerm(query));
+  })
   .catch(error => console.log(error));
 
 export const updateSearchTerm = (searchTerm = '') => ({
