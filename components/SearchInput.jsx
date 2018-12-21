@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Input, Button } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import { Router } from '../routes/routes';
 
-const searchInput = () => {
+const searchInput = (props) => {
   let inputNode;
 
   const searchInputHandler = () => {
@@ -29,7 +31,7 @@ const searchInput = () => {
             onClick={searchInputHandler}
           />}
         placeholder="Search..."
-        defaultValue=""
+        defaultValue={props.searchTerm}
         onKeyUp={enterKeyUpHandler}
         ref={input => inputNode = input}
       />
@@ -37,4 +39,12 @@ const searchInput = () => {
   );
 };
 
-export default searchInput;
+searchInput.propTypes = {
+  searchTerm: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = state => ({
+  searchTerm: state.searchTerm,
+});
+
+export default connect(mapStateToProps)(searchInput);
