@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 const SearchResults = props => (
   <div>
+    {props.searchTerm}: {props.totalItems}
     <ul className="searchResults">
       {props.items.map((item) => {
         const src = item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.thumbnail
@@ -54,6 +55,7 @@ SearchResults.propTypes = {
 const mapStateToProps = state => ({
   items: state.items,
   searchTerm: state.searchTerm,
+  totalItems: state.totalItems,
 });
 
 export default connect(mapStateToProps)(SearchResults);

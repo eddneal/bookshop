@@ -1,14 +1,16 @@
 import searchBooks from '../../api/googleBooksHandler';
 
-export const loadItems = (items = [], loaded = true) => ({
+export const loadItems = ({ items = [], totalItems = 0, loaded = true }) => ({
   type: 'DATA_LOADED',
   items,
+  totalItems,
   loaded,
 });
 
 export const handleLoadItems = (query, perPage) => dispatch => searchBooks(query, perPage)
   .then((response) => {
-    dispatch(loadItems(response.items));
+    const { items, totalItems } = response;
+    dispatch(loadItems({ items, totalItems }));
     dispatch(updateSearchTerm(query));
   })
   .catch(error => console.log(error));
@@ -27,5 +29,6 @@ export const clearSearch = () => ({
   type: 'SEARCH_CLEAR',
   searchTerm: '',
   items: [],
+  totalItems: 0,
   loaded: false,
 });
