@@ -7,11 +7,11 @@ export const loadItems = ({ items = [], totalItems = 0, loaded = true }) => ({
   loaded,
 });
 
-export const handleLoadItems = (query, perPage) => dispatch => searchBooks(query, perPage)
+export const handleLoadItems = params => dispatch => searchBooks(params)
   .then((response) => {
     const { items, totalItems } = response;
     dispatch(loadItems({ items, totalItems }));
-    dispatch(updateSearchTerm(query));
+    dispatch(updateSearchTerm(params.searchTerm || ''));
   })
   .catch(error => console.log(error));
 

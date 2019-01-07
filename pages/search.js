@@ -8,9 +8,9 @@ import SearchInput from '../components/SearchInput';
 import PerPageDropdown from '../components/PerPageDropdown';
 
 class Search extends Component {
-  static async getInitialProps({store, req, res, query}) {
+  static async getInitialProps({ store, req, res, query }) {
     return (query.keyword) ?
-      store.dispatch(handleLoadItems(query.keyword, store.getState().perPage)) :
+      store.dispatch(handleLoadItems({ searchTerm: query.keyword, perPage: store.getState().perPage })) :
       store.dispatch(clearSearch());
   }
 

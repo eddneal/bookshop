@@ -1,6 +1,7 @@
 const request = require('request');
 
-export default (searchTerm = 'harry+potter', perPage = 10) => new Promise((resolve, reject) => {
+export default params => new Promise((resolve, reject) => {
+  const { searchTerm = '', perPage = 10 } = params;
   const url = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&maxResults=${perPage}`;
   request(url, (err, resp, body) => {
     if (err) return reject(err);

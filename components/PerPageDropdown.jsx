@@ -55,7 +55,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setPerPage: ({ perPage }) => dispatch(updatePerPage(perPage)),
-  fetchItems: ({ searchTerm, perPage }) => dispatch(handleLoadItems(searchTerm, perPage)),
+  fetchItems: ({ searchTerm, perPage }) => dispatch(handleLoadItems({ searchTerm, perPage })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PerPageDropdown);
