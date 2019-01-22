@@ -1,8 +1,8 @@
 const request = require('request');
 
 export default params => new Promise((resolve, reject) => {
-  const { searchTerm = '', perPage = 10 } = params;
-  const url = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&maxResults=${perPage}`;
+  const { searchTerm = '', perPage = 10, filter } = params;
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&maxResults=${perPage}${filter !== 'none' ? `&filter=${filter}` : ''}`;
   request(url, (err, resp, body) => {
     if (err) return reject(err);
     if (resp.statusCode === 200) {

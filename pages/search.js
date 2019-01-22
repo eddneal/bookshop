@@ -6,11 +6,13 @@ import Layout from '../components/Layout';
 import SearchResults from '../components/SearchResults';
 import SearchInput from '../components/SearchInput';
 import PerPageDropdown from '../components/PerPageDropdown';
+import SearchRadioButtons from '../components/SearchRadioButtons';
 
 class Search extends Component {
   static async getInitialProps({ store, req, res, query }) {
+    const { perPage, filter } = store.getState();
     return (query.keyword) ?
-      store.dispatch(handleLoadItems({ searchTerm: query.keyword, perPage: store.getState().perPage })) :
+      store.dispatch(handleLoadItems({ searchTerm: query.keyword, perPage, filter })) :
       store.dispatch(clearSearch());
   }
 
@@ -21,6 +23,7 @@ class Search extends Component {
           <h1 className="title">Search</h1>
           <SearchInput />
           <PerPageDropdown />
+          <SearchRadioButtons />
           <SearchResults />
         </div>
         <style jsx>{`

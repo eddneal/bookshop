@@ -32,3 +32,9 @@ export const clearSearch = () => ({
   totalItems: 0,
   loaded: false,
 });
+
+export const setFilter = (filter = 'none') => ({
+  type: 'APPLY_FILTER',
+  filter,
+});
+
