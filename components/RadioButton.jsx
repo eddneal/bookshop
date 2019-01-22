@@ -5,7 +5,7 @@ class RadioButton extends React.PureComponent {
   render() {
     return (
       <React.Fragment>
-        <input type="radio" id={this.props.label} onClick={this.props.onClick} checked={this.props.checked} />
+        <input type="radio" id={this.props.label} onChange={this.props.onClick} checked={this.props.checked} />
         <label htmlFor={this.props.label}>{this.props.label}</label>
       </React.Fragment>
     );
