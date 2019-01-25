@@ -31,7 +31,7 @@ const searchInput = (props) => {
             onClick={searchInputHandler}
           />}
         placeholder="Search..."
-        defaultValue={props.searchTerm}
+        defaultValue={props.keyword}
         onKeyUp={enterKeyUpHandler}
         ref={input => inputNode = input}
       />
@@ -40,11 +40,11 @@ const searchInput = (props) => {
 };
 
 searchInput.propTypes = {
-  searchTerm: PropTypes.string.isRequired,
+  keyword: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
-  searchTerm: state.searchTerm,
+  keyword: state.keyword,
   perPage: state.perPage,
   filter: state.filter,
 });

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const SearchResults = props => (
   <div>
-    {props.searchTerm}: {props.totalItems}
+    {props.keyword}: {props.totalItems}
     <ul className="searchResults">
       {props.items.map((item) => {
         const src = item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.thumbnail
@@ -17,10 +17,10 @@ const SearchResults = props => (
           </li>);
       })}
     </ul>
-    {(!props.items.length && !props.searchTerm) && (
+    {(!props.items.length && !props.keyword) && (
       <div>Enter a search term.</div>
     )}
-    {(!props.items.length && props.searchTerm) && (
+    {(!props.items.length && props.keyword) && (
       <div>Your search returned no results, please try another search term.</div>
     )}
     <style jsx>{`
@@ -54,7 +54,7 @@ SearchResults.propTypes = {
 
 const mapStateToProps = state => ({
   items: state.items,
-  searchTerm: state.searchTerm,
+  keyword: state.keyword,
   totalItems: state.totalItems,
 });
 

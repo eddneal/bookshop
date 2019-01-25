@@ -22,14 +22,15 @@ const perPageOptions = [
 const PerPageDropdown = (props) => {
   const {
     perPage,
-    searchTerm,
+    keyword,
+    filter,
     setPerPage,
     fetchItems,
   } = props;
 
   const onChangeHandler = (event, data) => {
     setPerPage({ perPage: data.value });
-    fetchItems({ searchTerm, perPage: data.value });
+    fetchItems({ perPage: data.value, keyword, filter });
   };
 
   return (<Dropdown
@@ -44,18 +45,19 @@ const PerPageDropdown = (props) => {
 PerPageDropdown.propTypes = {
   perPage: PropTypes.string.isRequired,
   setPerPage: PropTypes.func.isRequired,
-  searchTerm: PropTypes.string.isRequired,
+  keyword: PropTypes.string.isRequired,
   fetchItems: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   perPage: state.perPage,
-  searchTerm: state.searchTerm,
+  keyword: state.keyword,
+  filter: state.filter,
 });
 
 const mapDispatchToProps = dispatch => ({
   setPerPage: ({ perPage }) => dispatch(updatePerPage(perPage)),
-  fetchItems: ({ searchTerm, perPage }) => dispatch(handleLoadItems({ searchTerm, perPage })),
+  fetchItems: ({ keyword, perPage, filter }) => dispatch(handleLoadItems({ keyword, perPage, filter })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PerPageDropdown);
