@@ -12,6 +12,7 @@ export const handleLoadItems = params => dispatch => searchBooks(params)
     const { items, totalItems } = response;
     dispatch(loadItems({ items, totalItems }));
     dispatch(updateSearchTerm(params.searchTerm || ''));
+    dispatch(setFilter(params.filter || '')); //TODO: better way
   })
   .catch(error => console.log(error));
 

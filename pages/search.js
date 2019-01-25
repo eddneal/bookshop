@@ -10,9 +10,9 @@ import SearchRadioButtons from '../components/SearchRadioButtons';
 
 class Search extends Component {
   static async getInitialProps({ store, req, res, query }) {
-    const { perPage, filter } = store.getState();
+    const { keyword, perPage, filter } = query;
     return (query.keyword) ?
-      store.dispatch(handleLoadItems({ searchTerm: query.keyword, perPage, filter })) :
+      store.dispatch(handleLoadItems({ searchTerm: keyword, perPage, filter })) :
       store.dispatch(clearSearch());
   }
 

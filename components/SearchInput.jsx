@@ -8,9 +8,9 @@ const searchInput = (props) => {
   let inputNode;
 
   const searchInputHandler = () => {
-    const searchTerm = inputNode.inputRef.value;
-    const href = `/search/${searchTerm}`;
-    Router.pushRoute(href);
+    const keyword = inputNode.inputRef.value;
+    const {perPage, filter} = props;
+    Router.pushRoute('search', { keyword, perPage, filter });
   };
 
   const enterKeyUpHandler = (e) => {
@@ -45,6 +45,8 @@ searchInput.propTypes = {
 
 const mapStateToProps = state => ({
   searchTerm: state.searchTerm,
+  perPage: state.perPage,
+  filter: state.filter,
 });
 
 export default connect(mapStateToProps)(searchInput);
