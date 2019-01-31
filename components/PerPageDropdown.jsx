@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Dropdown } from 'semantic-ui-react';
-import { handleLoadItems, updatePerPage } from '../store/actions';
+import { Router } from '../routes/routes';
 
 const perPageOptions = [
   {
@@ -24,13 +24,10 @@ const PerPageDropdown = (props) => {
     perPage,
     keyword,
     filter,
-    setPerPage,
-    fetchItems,
   } = props;
 
   const onChangeHandler = (event, data) => {
-    setPerPage({ perPage: data.value });
-    fetchItems({ perPage: data.value, keyword, filter });
+    Router.pushRoute('search', { keyword, perPage: data.value, filter });
   };
 
   return (<Dropdown
@@ -44,9 +41,8 @@ const PerPageDropdown = (props) => {
 
 PerPageDropdown.propTypes = {
   perPage: PropTypes.string.isRequired,
-  setPerPage: PropTypes.func.isRequired,
   keyword: PropTypes.string.isRequired,
-  fetchItems: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -55,9 +51,4 @@ const mapStateToProps = state => ({
   filter: state.filter,
 });
 
-const mapDispatchToProps = dispatch => ({
-  setPerPage: ({ perPage }) => dispatch(updatePerPage(perPage)),
-  fetchItems: ({ keyword, perPage, filter }) => dispatch(handleLoadItems({ keyword, perPage, filter })),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PerPageDropdown);
+export default connect(mapStateToProps)(PerPageDropdown);

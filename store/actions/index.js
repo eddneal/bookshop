@@ -20,8 +20,9 @@ export const handleLoadItems = params => dispatch => searchBooks(params)
   .then((response) => {
     const { items, totalItems } = response;
     dispatch(loadItems({ items, totalItems }));
-    dispatch(updateKeyword(params.keyword || ''));
-    dispatch(setFilter(params.filter || '')); //TODO: better way
+    dispatch(updateKeyword(params.keyword));
+    dispatch(updatePerPage(params.perPage));
+    dispatch(setFilter(params.filter)); //TODO: better way
   })
   .catch(error => console.log(error));
 
