@@ -6,6 +6,7 @@ export const stateDefaults = {
   loading: false,
   keyword: '',
   perPage: '10',
+  orderBy: 'relevance',
   filter: 'none',
 };
 
@@ -23,6 +24,7 @@ export const handleLoadItems = params => dispatch => searchBooks(params)
     dispatch(updateKeyword(params.keyword));
     dispatch(updatePerPage(params.perPage));
     dispatch(setFilter(params.filter)); //TODO: better way
+    dispatch(updateOrderBy(params.orderBy));
   })
   .catch(error => console.log(error));
 
@@ -49,3 +51,7 @@ export const setFilter = (filter = 'none') => ({
   filter,
 });
 
+export const updateOrderBy = (orderBy = 'relevance') => ({
+  type: 'ORDER_BY_UPDATED',
+  orderBy,
+});

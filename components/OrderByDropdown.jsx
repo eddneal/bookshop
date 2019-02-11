@@ -4,22 +4,18 @@ import { connect } from 'react-redux';
 import { Dropdown } from 'semantic-ui-react';
 import { Router } from '../routes/routes';
 
-const perPageOptions = [
+const orderByOptions = [
   {
-    text: '10',
-    value: '10',
+    text: 'Relevance',
+    value: 'relevance',
   },
   {
-    text: '20',
-    value: '20',
-  },
-  {
-    text: '40',
-    value: '40',
+    text: 'Newest',
+    value: 'newest',
   },
 ];
 
-const PerPageDropdown = (props) => {
+const OrderByDropdown = (props) => {
   const {
     perPage,
     keyword,
@@ -28,19 +24,19 @@ const PerPageDropdown = (props) => {
   } = props;
 
   const onChangeHandler = (event, data) => {
-    Router.pushRoute('search', { keyword, perPage: data.value, orderBy, filter });
+    Router.pushRoute('search', { keyword, perPage, orderBy: data.value, filter });
   };
 
   return (<Dropdown
-    placeholder={perPage}
-    options={perPageOptions}
+    placeholder={orderBy}
+    options={orderByOptions}
     onChange={onChangeHandler}
     selection
     fluid
   />);
 };
 
-PerPageDropdown.propTypes = {
+OrderByDropdown.propTypes = {
   perPage: PropTypes.string.isRequired,
   keyword: PropTypes.string.isRequired,
   filter: PropTypes.string.isRequired,
@@ -54,4 +50,4 @@ const mapStateToProps = state => ({
   orderBy: state.orderBy,
 });
 
-export default connect(mapStateToProps)(PerPageDropdown);
+export default connect(mapStateToProps)(OrderByDropdown);
