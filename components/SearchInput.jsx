@@ -1,45 +1,73 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Input, Button } from 'semantic-ui-react';
+import { Input, Button, Select } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Router } from '../routes/routes';
+import { addKeyword } from '../utils';
 
-const searchInput = (props) => {
-  let inputNode;
+class SearchInput extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      inputText: '',
+      keywordOption: 'keyword',
+    }
+  }
 
-  const searchInputHandler = () => {
-    const keyword = inputNode.inputRef.value;
-    const {perPage, filter} = props;
-    Router.pushRoute('search', { keyword, perPage, filter });
+  searchInputHandler = () => {
+    const {keyword, perPage, filter} = this.props;
+    const newKeyword = addKeyword(keyword, {[this.state.keywordOption]: this.state.inputText});
+    Router.pushRoute('search', {keyword: newKeyword, perPage, filter});
   };
 
-  const enterKeyUpHandler = (e) => {
+  enterKeyUpHandler = (e) => {
     if (e.key === 'Enter') {
-      searchInputHandler();
+      this.searchInputHandler();
+    } else {
+      this.setState({inputText: e.target.value});
     }
   };
 
-  return (
-    <div>
-      <Input
-        fluid
-        action={
+  selectHandler = (e, {value}) => {
+    this.setState({keywordOption: value});
+  };
+
+  options = [
+    { key: 'keyword', text: 'Keyword', value: 'keyword' },
+    { key: 'intitle', text: 'Title', value: 'intitle' },
+    { key: 'inauthor', text: 'Author', value: 'inauthor' },
+    { key: 'inpublisher', text: 'Publisher', value: 'inpublisher' },
+  ];
+
+  render() {
+    return (
+      <div>
+        <Input
+          fluid
+          type='text'
+          placeholder='Search...'
+          onKeyUp={this.enterKeyUpHandler}
+          action>
+        <input />
+          <Select
+            compact
+            options={this.options}
+            defaultValue='keyword'
+            onChange={this.selectHandler}
+          />
           <Button
             color="black"
             icon="search"
             content="Search"
-            onClick={searchInputHandler}
-          />}
-        placeholder="Search..."
-        defaultValue={props.keyword}
-        onKeyUp={enterKeyUpHandler}
-        ref={input => inputNode = input}
-      />
-    </div>
-  );
+            onClick={this.searchInputHandler}
+          />
+        </Input>
+      </div>
+    );
+  }
 };
 
-searchInput.propTypes = {
+SearchInput.propTypes = {
   keyword: PropTypes.string.isRequired,
 };
 
@@ -49,4 +77,4 @@ const mapStateToProps = state => ({
   filter: state.filter,
 });
 
-export default connect(mapStateToProps)(searchInput);
+export default connect(mapStateToProps)(SearchInput);
