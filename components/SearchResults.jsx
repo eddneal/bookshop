@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const SearchResults = props => (
   <div>
-    {props.keyword}: {props.totalItems}
+    {props.totalItems}
     <ul className="searchResults">
       {props.items.map((item) => {
         const src = item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.thumbnail
