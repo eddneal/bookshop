@@ -8,7 +8,6 @@ import { convertKeywordsStringToObject, removeKeyword } from '../utils';
 
 const SearchInfo = ({keyword, searchHandler}) => {
   const keywords = convertKeywordsStringToObject(keyword);
-  console.log(keywords);
   return <React.Fragment>
     {Object.entries(keywords).map(term => {
       return term[1] && <Label key={term[0]}>
