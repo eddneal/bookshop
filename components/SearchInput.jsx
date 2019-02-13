@@ -15,9 +15,8 @@ class SearchInput extends React.Component {
   }
 
   searchInputHandler = () => {
-    const {keyword, perPage, filter} = this.props;
-    const newKeyword = addKeyword(keyword, {[this.state.keywordOption]: this.state.inputText});
-    Router.pushRoute('search', {keyword: newKeyword, perPage, filter});
+    const {keyword} = this.props;
+    this.props.searchHandler({keyword: addKeyword(keyword, {[this.state.keywordOption]: this.state.inputText})});
   };
 
   enterKeyUpHandler = (e) => {
@@ -69,12 +68,11 @@ class SearchInput extends React.Component {
 
 SearchInput.propTypes = {
   keyword: PropTypes.string.isRequired,
+  searchHandler: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   keyword: state.keyword,
-  perPage: state.perPage,
-  filter: state.filter,
 });
 
 export default connect(mapStateToProps)(SearchInput);

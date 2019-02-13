@@ -22,13 +22,11 @@ const perPageOptions = [
 const PerPageDropdown = (props) => {
   const {
     perPage,
-    keyword,
-    filter,
-    orderBy
+    searchHandler,
   } = props;
 
   const onChangeHandler = (event, data) => {
-    Router.pushRoute('search', { keyword, perPage: data.value, orderBy, filter });
+    searchHandler({perPage: data.value});
   };
 
   return (<Dropdown
@@ -42,16 +40,11 @@ const PerPageDropdown = (props) => {
 
 PerPageDropdown.propTypes = {
   perPage: PropTypes.string.isRequired,
-  keyword: PropTypes.string.isRequired,
-  filter: PropTypes.string.isRequired,
-  orderBy: PropTypes.string.isRequired,
+  searchHandler: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   perPage: state.perPage,
-  keyword: state.keyword,
-  filter: state.filter,
-  orderBy: state.orderBy,
 });
 
 export default connect(mapStateToProps)(PerPageDropdown);

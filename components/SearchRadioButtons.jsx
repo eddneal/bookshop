@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setFilter } from "../store/actions";
+import { updateFilter } from "../store/actions";
 import RadioButton from './RadioButton';
 
 class SearchRadioButtons extends React.PureComponent {
@@ -46,7 +46,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleSetFilter: filter => dispatch(setFilter(filter)),
+  handleSetFilter: filter => dispatch(updateFilter(filter)),
 });
 
 SearchRadioButtons.propTypes = {

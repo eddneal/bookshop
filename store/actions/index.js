@@ -21,10 +21,6 @@ export const handleLoadItems = params => dispatch => searchBooks(params)
   .then((response) => {
     const { items, totalItems } = response;
     dispatch(loadItems({ items, totalItems }));
-    dispatch(updateKeyword(params.keyword));
-    dispatch(updatePerPage(params.perPage));
-    dispatch(setFilter(params.filter)); //TODO: better way
-    dispatch(updateOrderBy(params.orderBy));
   })
   .catch(error => console.log(error));
 
@@ -46,7 +42,7 @@ export const clearSearch = () => ({
   loaded: false,
 });
 
-export const setFilter = (filter = 'none') => ({
+export const updateFilter = (filter = 'none') => ({
   type: 'APPLY_FILTER',
   filter,
 });

@@ -17,14 +17,12 @@ const orderByOptions = [
 
 const OrderByDropdown = (props) => {
   const {
-    perPage,
-    keyword,
-    filter,
-    orderBy
+    orderBy,
+    searchHandler,
   } = props;
 
   const onChangeHandler = (event, data) => {
-    Router.pushRoute('search', { keyword, perPage, orderBy: data.value, filter });
+    searchHandler({orderBy: data.value})
   };
 
   return (<Dropdown
@@ -37,16 +35,11 @@ const OrderByDropdown = (props) => {
 };
 
 OrderByDropdown.propTypes = {
-  perPage: PropTypes.string.isRequired,
-  keyword: PropTypes.string.isRequired,
-  filter: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
+  searchHandler: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  perPage: state.perPage,
-  keyword: state.keyword,
-  filter: state.filter,
   orderBy: state.orderBy,
 });
 
