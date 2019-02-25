@@ -1,3 +1,12 @@
+import {curry, compose} from 'ramda';
+
+const objectAssign = curry((extensionObject, originalObject) => Object.assign(originalObject, extensionObject));
+
+const removeEntryFromObject = curry((keyToRemove, object) => {
+  const  {[keyToRemove]: value, ...keywordsToKeep } = object;
+  return keywordsToKeep;
+});
+
 export const convertKeywordsStringToObject = keywordsString => {
   return keywordsString.split(',')
     .reduce((acc, i) => {
@@ -20,13 +29,11 @@ export const convertKeywordsObjectToString = keywordsObject => {
 };
 
 export const addKeyword = (keywordString, keywordToAdd) => {
-  const keywordsObject = convertKeywordsStringToObject(keywordString);
-  const newKeywords = Object.assign(keywordsObject, keywordToAdd);
-  return convertKeywordsObjectToString(newKeywords);
+  const composeKeyword = compose(convertKeywordsObjectToString, objectAssign(keywordToAdd), convertKeywordsStringToObject);
+  return composeKeyword(keywordString);
 };
 
 export const removeKeyword = (keywordString, keywordToRemove) => {
-  const keywordsObject = convertKeywordsStringToObject(keywordString);
-  const  {[keywordToRemove]: value, ...keywordsToKeep } = keywordsObject;
-  return convertKeywordsObjectToString(keywordsToKeep);
+  const composeRemoveKeyword = compose(convertKeywordsObjectToString, removeEntryFromObject(keywordToRemove), convertKeywordsStringToObject);
+  return composeRemoveKeyword(keywordString);
 };
