@@ -6,7 +6,7 @@ import {
 } from '../store/actions';
 import Layout from '../components/Layout';
 import SearchResults from '../components/SearchResults';
-import SearchInput from '../components/SearchInput';
+import SearchInput from '../components/SearchInputWithHooks';
 import PerPageDropdown from '../components/PerPageDropdown';
 import OrderByDropdown from '../components/OrderByDropdown';
 import SearchRadioButtons from '../components/SearchRadioButtons';
