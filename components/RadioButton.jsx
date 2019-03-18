@@ -1,13 +1,31 @@
+/** @jsx jsx */
 import React from 'react';
 import PropTypes from 'prop-types';
+import {css, jsx} from '@emotion/core';
 
 class RadioButton extends React.PureComponent {
   render() {
     return (
-      <React.Fragment>
-        <input type="radio" id={this.props.label} onChange={this.props.onClick} checked={this.props.checked} />
-        <label htmlFor={this.props.label}>{this.props.label}</label>
-      </React.Fragment>
+      <div>
+        <input
+          type="radio"
+          id={this.props.label}
+          onChange={this.props.onClick}
+          checked={this.props.checked}
+          css={css`
+            cursor: pointer;
+          `}
+        />
+        <label htmlFor={this.props.label}
+          css={css`
+            display: inline-flex;
+            padding: 10px 20px 10px 5px;
+            cursor: pointer;
+          `}
+        >
+          {this.props.label}
+        </label>
+      </div>
     );
   }
 }

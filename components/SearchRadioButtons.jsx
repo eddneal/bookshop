@@ -1,6 +1,8 @@
+/** @jsx jsx */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {css, jsx} from '@emotion/core';
 import { updateFilter } from "../store/actions";
 import RadioButton from './RadioButton';
 
@@ -27,7 +29,17 @@ class SearchRadioButtons extends React.PureComponent {
 
   render() {
     return (
-      <div>
+      <div css={css`
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding-left: 10px;
+        @media (min-width: 420px) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        @media (min-width: 960px) {
+          grid-auto-flow: column;
+        }
+      `}>
         {Object.entries(this.filters).map(entry => (
           <RadioButton
             key={entry[0]}

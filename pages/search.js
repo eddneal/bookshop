@@ -1,5 +1,7 @@
+/** @jsx jsx */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {css, jsx} from '@emotion/core';
 import { Router } from '../routes/routes';
 import {
   stateDefaults, handleLoadItems, clearSearch, updateFilter, updateKeyword, updateOrderBy, updatePerPage
@@ -39,10 +41,46 @@ class Search extends Component {
         <div className="hero">
           <h1 className="title">Search</h1>
           <SearchInput searchHandler={this.handleSearch} />
-          <SearchRadioButtons />
+          <div css={css`
+            display: flex;
+            flex-direction: column;
+            padding: 10px 0 20px;
+            border-bottom: 1px solid rgba(34,36,38,.15);
+            @media (min-width: 960px) {
+              flex-direction: row;
+              padding-bottom: 10px;
+            }
+          `}>
+            <SearchRadioButtons />
+            <div css={css`
+              display: flex;
+              padding-top: 10px;
+              @media (min-width: 960px) {
+                padding-top: 0;
+                margin-left: auto;
+              }
+           `}>
+              <div css={css`
+                flex: 1 1;
+                margin-right: 10px;
+                @media (min-width: 960px) {
+                  width: 65px;
+                }
+              `}>
+
+                <PerPageDropdown searchHandler={this.handleSearch} />
+              </div>
+              <div css={css`
+                flex: 1 1;
+                @media (min-width: 960px) {
+                  width:110px
+                }
+              `}>
+                <OrderByDropdown searchHandler={this.handleSearch} />
+              </div>
+            </div>
+          </div>
           <SearchInfo searchHandler={this.handleSearch} />
-          <PerPageDropdown searchHandler={this.handleSearch} />
-          <OrderByDropdown searchHandler={this.handleSearch} />
           <SearchResults />
         </div>
         <style jsx>{`

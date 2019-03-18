@@ -1,7 +1,9 @@
+/** @jsx jsx */
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { Input, Button, Select } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import {css, jsx} from '@emotion/core';
 import { addKeyword } from '../utils';
 
 const searchInput = (props) => {
@@ -43,6 +45,7 @@ const searchInput = (props) => {
       >
         <input />
         <Select
+          css={css`width: 120px;`}
           compact
           options={options}
           defaultValue="keyword"
