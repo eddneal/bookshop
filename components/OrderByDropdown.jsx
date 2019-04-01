@@ -25,8 +25,10 @@ const OrderByDropdown = (props) => {
     searchHandler({orderBy: data.value})
   };
 
+  const placeholder = orderByOptions.find(options => options.value === orderBy).text;
+
   return (<Dropdown
-    placeholder={orderBy}
+    placeholder={placeholder}
     options={orderByOptions}
     onChange={onChangeHandler}
     selection
