@@ -22,6 +22,7 @@ const Head = props => (
     <meta property="og:image" content={props.ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic" />
     <link rel="stylesheet" type="text/css" href="/_next/static/styles.css" />
   </NextHead>
 );
