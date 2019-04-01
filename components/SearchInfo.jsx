@@ -1,22 +1,33 @@
+/** @jsx jsx */
 import React from 'react';
 import { connect } from 'react-redux';
 import { Icon, Label } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import {css, jsx} from '@emotion/core';
 import { updateKeywords } from '../store/actions';
 import { Router } from '../routes/routes';
 import { convertKeywordsStringToObject, removeKeyword } from '../utils';
+import SearchCount from './SearchCount';
 
 const SearchInfo = ({keyword, searchHandler}) => {
   const keywords = convertKeywordsStringToObject(keyword);
-  return <React.Fragment>
-    {Object.entries(keywords).map(term => {
-      return term[1] && <Label key={term[0]}>
-        {term[0] === 'keyword' ? `${term[1]}`: `${term[0]}:${term[1]}`}
-        <Icon name='delete'
-              onClick={() => searchHandler({keyword: removeKeyword(keyword, term[0])})} />
-      </Label>
-    })}
-  </React.Fragment>
+  return (
+    <div css={css`padding: 20px 10px;`}>
+      <div css={css`
+        display: inline-block;
+        padding-right: 10px;
+      `}>
+        <SearchCount />
+      </div>
+      {Object.entries(keywords).map(term => {
+        return term[1] && <Label key={term[0]}>
+          {term[0] === 'keyword' ? `${term[1]}`: `${term[0]}:${term[1]}`}
+          <Icon name='delete'
+                onClick={() => searchHandler({keyword: removeKeyword(keyword, term[0])})} />
+        </Label>;
+      })}
+    </div>
+  );
 };
 
 SearchInfo.propTypes = {
