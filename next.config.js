@@ -8,8 +8,13 @@ module.exports = {
     };
 
     config.module.rules.push({
-      test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+      test: /\.(png|woff|woff2|eot|ttf)$/,
       loader: 'url-loader?limit=100000',
+    });
+
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
     });
 
     config.module.rules.push({
