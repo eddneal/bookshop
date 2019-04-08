@@ -7,7 +7,7 @@ import {
   stateDefaults, handleLoadItems, clearSearch, updateFilter, updateKeyword, updateOrderBy, updatePerPage
 } from '../store/actions';
 import Layout from '../components/Layout';
-import SearchResults from '../components/SearchResults';
+import SearchResults from '../components/SearchResults/index';
 import SearchInput from '../components/SearchInputWithHooks';
 import PerPageDropdown from '../components/PerPageDropdown';
 import OrderByDropdown from '../components/OrderByDropdown';
