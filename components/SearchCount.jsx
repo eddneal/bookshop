@@ -1,12 +1,22 @@
 import React, { memo } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { compose } from 'ramda';
 
-const SearchCount = props => (
-  <span>
-    {props.totalItems}
-      &nbsp;Books found
-  </span>
+const SearchCount = ({ totalItems }) => (
+  <>
+    { totalItems > 0 && (
+      <span>
+        {totalItems}
+        &nbsp;
+        Book
+        {totalItems > 1 ? 's' : ''}
+        &nbsp;
+        found
+      </span>
+    )
+    }
+  </>
 );
 
 const mapStateToProps = state => ({
@@ -17,4 +27,4 @@ SearchCount.propTypes = {
   totalItems: PropTypes.number.isRequired,
 };
 
-export default connect(mapStateToProps)(memo(SearchCount));
+export default compose(memo, connect(mapStateToProps))(SearchCount);
