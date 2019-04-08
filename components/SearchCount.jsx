@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const SearchCount = props => (
   <span>
     {props.totalItems}
-      &nbsp;Items
+      &nbsp;Books found
   </span>
 );
 
