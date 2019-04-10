@@ -1,7 +1,6 @@
-/** @jsx jsx */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {css, jsx} from '@emotion/core';
+import { css } from '@emotion/core';
 import Head from './Head';
 import Header from './Header';
 import Footer from './Footer';

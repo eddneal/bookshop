@@ -1,8 +1,7 @@
-/** @jsx jsx */
 import React from 'react';
 import { Menu } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import {css, jsx} from '@emotion/core';
+import { css } from '@emotion/core';
 import Logo from '../static/logo.svg';
 import { Link } from '../routes/routes';
 

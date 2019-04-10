@@ -1,8 +1,6 @@
-/** @jsx jsx */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { jsx } from '@emotion/core';
 import {
   searchResults, searchResult, bookCover, bookTitle,
 } from './styles';

@@ -1,8 +1,7 @@
-/** @jsx jsx */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {css, jsx} from '@emotion/core';
+import { css } from '@emotion/core';
 import { updateFilter } from "../store/actions";
 import RadioButton from './RadioButton';
 

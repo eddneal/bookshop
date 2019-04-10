@@ -1,9 +1,8 @@
-/** @jsx jsx */
 import React from 'react';
 import { connect } from 'react-redux';
 import { Icon, Label } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import {css, jsx} from '@emotion/core';
+import { css } from '@emotion/core';
 import { updateKeywords } from '../store/actions';
 import { Router } from '../routes/routes';
 import { convertKeywordsStringToObject, removeKeyword } from '../utils';
