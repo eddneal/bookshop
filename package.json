@@ -30,6 +30,7 @@
     "tls": "0.0.1"
   },
   "devDependencies": {
+    "@emotion/babel-preset-css-prop": "^10.0.9",
     "css-loader": "^2.1.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.9.1",
