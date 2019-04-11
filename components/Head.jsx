@@ -24,6 +24,7 @@ const Head = props => (
     <meta property="og:image:height" content="630" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic" />
     <link rel="stylesheet" type="text/css" href="/_next/static/styles.css" />
+    <style type="text/css">#__next { 'height: 100%;' }</style>
   </NextHead>
 );
 

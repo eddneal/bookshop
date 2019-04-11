@@ -5,10 +5,15 @@ import Head from './Head';
 import Header from './Header';
 import Footer from './Footer';
 
-const Layout = props => (
-  <div>
-    <Head title={props.page} />
-    <Header page={props.page} />
+const Layout = ({ page, children }) => (
+  <div css={css`
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  `}
+  >
+    <Head title={page} />
+    <Header page={page} />
     <div css={css`
       padding: 80px 60px;
       background-image: url(/static/bookcase.jpg);
@@ -18,15 +23,18 @@ const Layout = props => (
       <h1 css={css`
         font: 80px 'Gentium Book Basic', serif;
         color: white;
-      `}>{props.page}</h1>
+      `}>
+        {page}
+      </h1>
     </div>
     <main css={css`
+        height: 100%;
         padding: 30px;
         @media (min-width: 960px) {
           padding: 60px;
         }
       `}>
-      {props.children}
+      {children}
     </main>
     <Footer />
   </div>
