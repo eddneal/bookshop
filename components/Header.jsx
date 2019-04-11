@@ -34,7 +34,7 @@ const Header = props => (
               active={props.page === item.name}
               key={item.name}
               color="teal"
-              css={css`align-self: center!important; height: 100%`}
+              css={css`align-self: center!important; height: 100%;`}
             >
               <Link route={item.route}>
                 <a css={css`color: teal;`}>{item.name}</a>
