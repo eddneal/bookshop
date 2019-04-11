@@ -10,11 +10,17 @@ export const stateDefaults = {
   filter: 'none',
 };
 
-export const loadItems = ({ items = [], totalItems = 0, loaded = true }) => ({
+export const loadItems = ({ items = [], totalItems = 0, loading = false }) => ({
   type: 'DATA_LOADED',
   items,
   totalItems,
-  loaded,
+  loading,
+});
+
+export const setLoading = (loading = true) => ({
+  type: 'SET_LOADING',
+  items: [],
+  loading,
 });
 
 export const handleLoadItems = params => dispatch => searchBooks(params)
@@ -39,7 +45,7 @@ export const clearSearch = () => ({
   keyword: '',
   items: [],
   totalItems: 0,
-  loaded: false,
+  loading: false,
 });
 
 export const updateFilter = (filter = 'none') => ({

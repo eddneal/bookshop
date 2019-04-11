@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { css } from '@emotion/core';
+import BookLoader from '../../static/bookLoader.svg';
 import {
   searchResults, searchResult, bookCover, bookTitle,
 } from './styles';
 
-const Index = ({ items, keyword }) => (
+const Index = ({ items, keyword, loading }) => (
   <div>
     <ul css={searchResults}>
       {items.map((item) => {
@@ -20,10 +22,13 @@ const Index = ({ items, keyword }) => (
         );
       })}
     </ul>
+    {loading && (
+      <BookLoader css={css`display: block; margin: 0 auto;`} />
+    )}
     {(!items.length && !keyword) && (
       <div>Enter a search term.</div>
     )}
-    {(!items.length && keyword) && (
+    {(!items.length && !loading && keyword) && (
       <div>Your search returned no results, please try another search term.</div>
     )}
   </div>
@@ -32,12 +37,14 @@ const Index = ({ items, keyword }) => (
 Index.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   keyword: PropTypes.string.isRequired,
+  loading: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   items: state.items,
   keyword: state.keyword,
   totalItems: state.totalItems,
+  loading: state.loading,
 });
 
 export default connect(mapStateToProps)(Index);

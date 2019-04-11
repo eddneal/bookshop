@@ -1,10 +1,9 @@
-/** @jsx jsx */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {css, jsx} from '@emotion/core';
+import { css } from '@emotion/core';
 import { Router } from '../routes/routes';
 import {
-  stateDefaults, handleLoadItems, clearSearch, updateFilter, updateKeyword, updateOrderBy, updatePerPage
+  stateDefaults, handleLoadItems, clearSearch, updateFilter, updateKeyword, updateOrderBy, updatePerPage, setLoading
 } from '../store/actions';
 import Layout from '../components/Layout';
 import SearchResults from '../components/SearchResults/index';
@@ -27,11 +26,13 @@ class Search extends Component {
   }
 
   handleSearch = (newSearchValue) => {
-    const { keyword, perPage, orderBy, filter } = this.props;
+    const { keyword, perPage, orderBy, filter, dispatchSetLoading } = this.props;
     const [key, value] = Object.entries(newSearchValue)[0];
     const dispatchFunction = `dispatch${key.charAt(0).toUpperCase()}${key.slice(1)}`;
-    this.props[dispatchFunction](value);
     const newSearchParams = {keyword, perPage, orderBy, filter, ...newSearchValue};
+
+    dispatchSetLoading();
+    this.props[dispatchFunction](value);
     Router.pushRoute('search', newSearchParams.keyword ? newSearchParams : {});
   };
 
@@ -97,6 +98,7 @@ const mapDispatchToProps = dispatch => ({
   dispatchPerPage(perPage) { dispatch(updatePerPage(perPage))},
   dispatchFilter(filter) { dispatch(updateFilter(filter))},
   dispatchOrderBy(orderBy) { dispatch(updateOrderBy(orderBy))},
+  dispatchSetLoading() { dispatch(setLoading())},
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

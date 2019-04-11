@@ -14,6 +14,8 @@ const searchItems = (state = stateDefaults, action) => {
       return { ...state, filter: action.filter };
     case 'SEARCH_CLEAR':
       return { ...state, items: action.items, totalItems: action.totalItems, keyword: action.keyword, loading: action.loading };
+    case 'SET_LOADING':
+      return { ...state, items: action.items, loading: action.loading };
     default:
       return state;
   }
