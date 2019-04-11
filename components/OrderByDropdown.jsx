@@ -22,18 +22,20 @@ const OrderByDropdown = (props) => {
   } = props;
 
   const onChangeHandler = (event, data) => {
-    searchHandler({orderBy: data.value})
+    searchHandler({ orderBy: data.value });
   };
 
   const placeholder = orderByOptions.find(options => options.value === orderBy).text;
 
-  return (<Dropdown
-    placeholder={placeholder}
-    options={orderByOptions}
-    onChange={onChangeHandler}
-    selection
-    fluid
-  />);
+  return (
+    <Dropdown
+      placeholder={placeholder}
+      options={orderByOptions}
+      onChange={onChangeHandler}
+      selection
+      fluid
+    />
+  );
 };
 
 OrderByDropdown.propTypes = {

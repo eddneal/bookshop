@@ -26,16 +26,18 @@ const PerPageDropdown = (props) => {
   } = props;
 
   const onChangeHandler = (event, data) => {
-    searchHandler({perPage: data.value});
+    searchHandler({ perPage: data.value });
   };
 
-  return (<Dropdown
-    placeholder={perPage}
-    options={perPageOptions}
-    onChange={onChangeHandler}
-    selection
-    fluid
-  />);
+  return (
+    <Dropdown
+      placeholder={perPage}
+      options={perPageOptions}
+      onChange={onChangeHandler}
+      selection
+      fluid
+    />
+  );
 };
 
 PerPageDropdown.propTypes = {
