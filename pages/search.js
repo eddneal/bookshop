@@ -10,7 +10,7 @@ import SearchResults from '../components/SearchResults/index';
 import SearchInput from '../components/SearchInputWithHooks';
 import PerPageDropdown from '../components/PerPageDropdown';
 import OrderByDropdown from '../components/OrderByDropdown';
-import SearchRadioButtons from '../components/SearchRadioButtons';
+import SearchRadioButtons from '../components/SearchRadioButtons/index';
 import SearchInfo from '../components/SearchInfo';
 
 class Search extends Component {
