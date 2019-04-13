@@ -1,15 +1,14 @@
 import React from 'react';
+import { css } from '@emotion/core';
 
 export default () => (
-  <footer>
+  <footer css={css`
+    padding: 30px;
+    text-align: right;
+    background-color: #000;
+    color: #fff;
+  `}
+  >
     <p>Copyright © Bookshop 2018</p>
-    <style jsx>{`
-    footer {
-      padding: 30px;
-      text-align: right;
-      background-color: #000;
-      color: #fff;
-    }
-  `}</style>
   </footer>
 );
