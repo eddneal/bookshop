@@ -15,12 +15,7 @@ const orderByOptions = [
   },
 ];
 
-const OrderByDropdown = (props) => {
-  const {
-    orderBy,
-    searchHandler,
-  } = props;
-
+const OrderByDropdown = ({ orderBy, searchHandler }) => {
   const onChangeHandler = (event, data) => {
     searchHandler({ orderBy: data.value });
   };

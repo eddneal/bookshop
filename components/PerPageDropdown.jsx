@@ -19,12 +19,7 @@ const perPageOptions = [
   },
 ];
 
-const PerPageDropdown = (props) => {
-  const {
-    perPage,
-    searchHandler,
-  } = props;
-
+const PerPageDropdown = ({ perPage, searchHandler }) => {
   const onChangeHandler = (event, data) => {
     searchHandler({ perPage: data.value });
   };
