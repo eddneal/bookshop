@@ -5,7 +5,7 @@ export const stateDefaults = {
   totalItems: 0,
   loading: false,
   keyword: '',
-  perPage: '10',
+  perPage: '40',
   orderBy: 'relevance',
   filter: 'none',
 };
@@ -35,7 +35,7 @@ export const updateKeyword = (keyword = '') => ({
   keyword,
 });
 
-export const updatePerPage = (perPage = 10) => ({
+export const updatePerPage = (perPage = '40') => ({
   type: 'PER_PAGE_UPDATED',
   perPage,
 });
