@@ -1,16 +1,15 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Input, Button, Select } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { addKeyword } from '../utils';
 
-const searchInput = (props) => {
+const searchInput = ({ keyword, searchHandler }) => {
   const [inputText, setInputText] = useState('');
   const [keywordOption, setKeywordOption] = useState('keyword');
 
   const searchInputHandler = () => {
-    const { keyword, searchHandler } = props;
     searchHandler({ keyword: addKeyword(keyword, { [keywordOption]: inputText }) });
   };
 
@@ -34,7 +33,7 @@ const searchInput = (props) => {
   ];
 
   return (
-    <Fragment>
+    <>
       <Input
         fluid
         type="text"
@@ -57,7 +56,7 @@ const searchInput = (props) => {
           onClick={searchInputHandler}
         />
       </Input>
-    </Fragment>
+    </>
   );
 };
 
