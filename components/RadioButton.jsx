@@ -1,33 +1,30 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 
-class RadioButton extends React.PureComponent {
-  render() {
-    return (
-      <div>
-        <input
-          type="radio"
-          id={this.props.label}
-          onChange={this.props.onClick}
-          checked={this.props.checked}
-          css={css`
-            cursor: pointer;
-          `}
-        />
-        <label htmlFor={this.props.label}
-          css={css`
-            display: inline-flex;
-            padding: 10px 20px 10px 5px;
-            cursor: pointer;
-          `}
-        >
-          {this.props.label}
-        </label>
-      </div>
-    );
-  }
-}
+const RadioButton = ({ label, onClick, checked }) => (
+  <div>
+    <input
+      type="radio"
+      id={label}
+      onChange={onClick}
+      checked={checked}
+      css={css`
+        cursor: pointer;
+      `}
+    />
+    <label
+      htmlFor={label}
+      css={css`
+        display: inline-flex;
+        padding: 10px 20px 10px 5px;
+        cursor: pointer;
+      `}
+    >
+      {label}
+    </label>
+  </div>
+);
 
 RadioButton.propTypes = {
   label: PropTypes.string.isRequired,
@@ -35,4 +32,4 @@ RadioButton.propTypes = {
   checked: PropTypes.bool.isRequired,
 };
 
-export default RadioButton;
+export default memo(RadioButton);
