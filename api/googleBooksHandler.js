@@ -1,9 +1,9 @@
 const request = require('request');
 
 export default params => new Promise((resolve, reject) => {
-  const { keyword = '', perPage = 10, orderBy = 'relevance', filter = 'none', startIndex = 0 } = params;
-  //use urlsearchparams https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
-  const url = `https://www.googleapis.com/books/v1/volumes?q=${keyword}&maxResults=${perPage.toString()}&startIndex=${startIndex.toString()}&orderBy=${orderBy}${filter !== 'none' ? `&filter=${filter}` : ''}`;
+  const  searchParams = new URLSearchParams();
+  Object.entries(params).forEach(param => (param[0] !== 'filter' || param[1] !== 'none') && searchParams.set(param[0], param[1]));
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${searchParams.toString()}`;
   request(url, (err, resp, body) => {
     if (err) return reject(err);
     if (resp.statusCode === 200) {
@@ -14,4 +14,3 @@ export default params => new Promise((resolve, reject) => {
     return reject(new Error('Server error (non 200 status code)'));
   });
 });
-
