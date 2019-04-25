@@ -8,6 +8,8 @@ const searchItems = (state = stateDefaults, action) => {
       return { ...state, keyword: action.keyword };
     case 'PER_PAGE_UPDATED':
       return { ...state, perPage: action.perPage };
+    case 'START_INDEX_UPDATED':
+      return { ...state, startIndex: action.startIndex };
     case 'ORDER_BY_UPDATED':
       return { ...state, orderBy: action.orderBy };
     case 'APPLY_FILTER':

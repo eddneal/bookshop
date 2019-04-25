@@ -10,7 +10,7 @@ import SearchCount from './SearchCount';
 const SearchInfo = ({ keyword, searchHandler }) => {
   const keywords = convertKeywordsStringToObject(keyword);
   return (
-    <div css={css`padding: 20px 10px;`}>
+    <div>
       <div css={css`
         display: inline-block;
         padding-right: 10px;

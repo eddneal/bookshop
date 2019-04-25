@@ -37,3 +37,9 @@ export const removeKeyword = (keywordString, keywordToRemove) => {
   const composeRemoveKeyword = compose(convertKeywordsObjectToString, removeEntryFromObject(keywordToRemove), convertKeywordsStringToObject);
   return composeRemoveKeyword(keywordString);
 };
+
+export const shallowParseInts = (objectA, objectB) => {
+  return Object.entries(objectB).reduce((acc, el) => {
+    return { ...acc, [el[0]]: typeof objectA[el[0]] === 'number' ? parseInt(el[1], 10) : el[1] };
+  }, {});
+};

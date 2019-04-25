@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { css } from '@emotion/core';
 import { Router } from '../routes/routes';
-import {
-  stateDefaults, handleLoadItems, clearSearch, updateFilter, updateKeyword, updateOrderBy, updatePerPage, setLoading
-} from '../store/actions';
 import Layout from '../components/Layout';
 import SearchResults from '../components/SearchResults/index';
 import SearchInput from '../components/SearchInputWithHooks';
@@ -12,6 +9,19 @@ import PerPageDropdown from '../components/PerPageDropdown';
 import OrderByDropdown from '../components/OrderByDropdown';
 import SearchRadioButtons from '../components/SearchRadioButtons/index';
 import SearchInfo from '../components/SearchInfo';
+import SearchPagination from '../components/SearchPagination';
+import { shallowParseInts } from "../utils";
+import {
+  stateDefaults,
+  handleLoadItems,
+  clearSearch,
+  updateFilter,
+  updateKeyword,
+  updateOrderBy,
+  updatePerPage,
+  updateStartIndex,
+  setLoading
+} from '../store/actions';
 
 class Search extends Component {
   constructor(props) {
@@ -19,10 +29,18 @@ class Search extends Component {
   }
 
   static async getInitialProps({ store, req, res, query }) {
-    const { keyword, perPage, orderBy, filter } = Object.assign(stateDefaults, query);
-    return (query.keyword) ?
-      store.dispatch(handleLoadItems({ keyword: decodeURI(keyword), perPage, orderBy, filter })) :
-      store.dispatch(clearSearch());
+    const typeCastQuery = shallowParseInts(stateDefaults, query);
+    const { keyword, perPage, orderBy, filter, startIndex } = Object.assign(stateDefaults, typeCastQuery);
+
+    return (query.keyword)
+      ? store.dispatch(handleLoadItems({
+          keyword: decodeURI(keyword),
+          perPage,
+          startIndex,
+          filter,
+          orderBy})
+        )
+      : store.dispatch(clearSearch());
   }
 
   handleSearch = (newSearchValue) => {
@@ -79,7 +97,22 @@ class Search extends Component {
             </div>
           </div>
         </div>
-        <SearchInfo searchHandler={this.handleSearch} />
+        <div css={css`
+          display: flex;
+          flex-direction: column;
+          padding: 10px 0 20px;
+          @media (min-width: 960px) {
+            flex-direction: row;
+            align-items: center;
+          }
+        `}>
+          <SearchInfo searchHandler={this.handleSearch} />
+          <div css={css`
+          margin-left: auto;
+        `}>
+            <SearchPagination searchHandler={this.handleSearch} />
+          </div>
+        </div>
         <SearchResults />
       </Layout>
     );
@@ -91,6 +124,7 @@ const mapStateToProps = state => ({
   perPage: state.perPage,
   orderBy: state.orderBy,
   filter: state.filter,
+  startIndex: state.startIndex,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -99,6 +133,7 @@ const mapDispatchToProps = dispatch => ({
   dispatchFilter(filter) { dispatch(updateFilter(filter))},
   dispatchOrderBy(orderBy) { dispatch(updateOrderBy(orderBy))},
   dispatchSetLoading() { dispatch(setLoading())},
+  dispatchStartIndex(startIndex) { dispatch(updateStartIndex(startIndex))}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
