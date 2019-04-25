@@ -3,6 +3,8 @@ import NextHead from 'next/head';
 import { string } from 'prop-types';
 import '../semantic/dist/semantic.min.css';
 
+
+
 const Head = props => (
   <NextHead>
     <meta charSet="UTF-8" />
@@ -24,7 +26,7 @@ const Head = props => (
     <meta property="og:image:height" content="630" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic" />
     <link rel="stylesheet" type="text/css" href="/_next/static/styles.css" />
-    <style type="text/css">#__next { 'height: 100%;' }</style>
+    <style type="text/css">#__next {'{height: 100%;}'}</style>
   </NextHead>
 );
 
