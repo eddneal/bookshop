@@ -26,7 +26,7 @@ const PerPageDropdown = ({ perPage, searchHandler }) => {
 
   return (
     <Dropdown
-      placeholder={perPage}
+      placeholder={perPage.toString()}
       options={perPageOptions}
       onChange={onChangeHandler}
       selection
@@ -36,7 +36,7 @@ const PerPageDropdown = ({ perPage, searchHandler }) => {
 };
 
 PerPageDropdown.propTypes = {
-  perPage: PropTypes.string.isRequired,
+  perPage: PropTypes.number.isRequired,
   searchHandler: PropTypes.func.isRequired,
 };
 
