@@ -28,7 +28,7 @@ const Layout = ({ page, children }) => (
       </h1>
     </div>
     <main css={css`
-        height: 100%;
+        flex-grow: 1;
         padding: 30px;
         @media (min-width: 960px) {
           padding: 60px;
