@@ -27,12 +27,20 @@ export const convertKeywordsObjectToString = (keywordsObject) => {
 };
 
 export const addKeyword = (keywordString, keywordToAdd) => {
-  const composeKeyword = compose(convertKeywordsObjectToString, objectAssign(keywordToAdd), convertKeywordsStringToObject);
+  const composeKeyword = compose(
+    convertKeywordsObjectToString,
+    objectAssign(keywordToAdd),
+    convertKeywordsStringToObject,
+  );
   return composeKeyword(keywordString);
 };
 
 export const removeKeyword = (keywordString, keywordToRemove) => {
-  const composeRemoveKeyword = compose(convertKeywordsObjectToString, removeEntryFromObject(keywordToRemove), convertKeywordsStringToObject);
+  const composeRemoveKeyword = compose(
+    convertKeywordsObjectToString,
+    removeEntryFromObject(keywordToRemove),
+    convertKeywordsStringToObject,
+  );
   return composeRemoveKeyword(keywordString);
 };
 
