@@ -1,25 +1,23 @@
-import {curry, compose} from 'ramda';
+import { curry, compose } from 'ramda';
 
 const objectAssign = curry((extensionObject, originalObject) => Object.assign(originalObject, extensionObject));
 
 const removeEntryFromObject = curry((keyToRemove, object) => {
-  const  {[keyToRemove]: value, ...keywordsToKeep } = object;
+  const { [keyToRemove]: value, ...keywordsToKeep } = object;
   return keywordsToKeep;
 });
 
-export const convertKeywordsStringToObject = keywordsString => {
-  return keywordsString.split(',')
-    .reduce((acc, i) => {
-        const keywordPairs = i.split(':');
-        return keywordPairs[1]
-          ? Object.assign(acc, {[keywordPairs[0]]: keywordPairs[1]})
-          : Object.assign(acc, {keyword: keywordPairs[0]});
-      },
-      {});
-};
+export const convertKeywordsStringToObject = keywordsString => keywordsString.split(',')
+  .reduce((acc, i) => {
+    const keywordPairs = i.split(':');
+    return keywordPairs[1]
+      ? Object.assign(acc, { [keywordPairs[0]]: keywordPairs[1] })
+      : Object.assign(acc, { keyword: keywordPairs[0] });
+  },
+  {});
 
-export const convertKeywordsObjectToString = keywordsObject => {
-  const {keyword, ...otherKeywords} = keywordsObject;
+export const convertKeywordsObjectToString = (keywordsObject) => {
+  const { keyword, ...otherKeywords } = keywordsObject;
   const otherKeywordsEntries = Object.entries(otherKeywords);
 
   return (!keyword && otherKeywordsEntries.length === 0)
@@ -43,3 +41,5 @@ export const shallowParseInts = (objectA, objectB) => {
     return { ...acc, [el[0]]: typeof objectA[el[0]] === 'number' ? parseInt(el[1], 10) : el[1] };
   }, {});
 };
+
+export const mapValue = (value, map) => (map[value] ? map[value] : value);
