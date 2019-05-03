@@ -17,8 +17,10 @@ export const searchResult = css`
 export const bookCover = css`
   width: 100%;
   height: auto;
+  border: 5px solid #e8e8e8;
 `;
 
 export const bookTitle = css`
-  margin-top: auto;
+  background: #e8e8e8;
+  padding: 5px 5px 10px;
 `;

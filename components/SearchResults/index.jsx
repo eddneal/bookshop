@@ -13,7 +13,7 @@ const Index = ({ items, keyword, loading }) => (
       {items.map((item) => {
         const src = item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.thumbnail
           ? item.volumeInfo.imageLinks.thumbnail
-          : ''; // TODO: Add fallback image
+          : 'static/defaultCover.png';
         return (
           <li css={searchResult} key={item.id}>
             <img css={bookCover} src={src} alt={item.volumeInfo.title} />

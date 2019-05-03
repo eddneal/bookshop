@@ -50,4 +50,9 @@ export const shallowParseInts = (objectA, objectB) => {
   }, {});
 };
 
+export const apiParamsMap = {
+  keyword: 'q',
+  perPage: 'maxResults',
+};
+
 export const mapValue = (value, map) => (map[value] ? map[value] : value);
