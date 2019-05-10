@@ -44,10 +44,10 @@ class Search extends Component {
   }
 
   handleSearch = (newSearchValue) => {
-    const { keyword, perPage, orderBy, filter, dispatchSetLoading } = this.props;
+    const { keyword, perPage, orderBy, filter, startIndex, dispatchSetLoading } = this.props;
     const [key, value] = Object.entries(newSearchValue)[0];
     const dispatchFunction = `dispatch${key.charAt(0).toUpperCase()}${key.slice(1)}`;
-    const newSearchParams = {keyword, perPage, orderBy, filter, ...newSearchValue};
+    const newSearchParams = {keyword, perPage, orderBy, filter, startIndex, ...newSearchValue};
 
     dispatchSetLoading();
     this.props[dispatchFunction](value);
