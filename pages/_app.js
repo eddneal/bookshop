@@ -4,7 +4,7 @@ import App, { Container } from 'next/app';
 import withRedux from 'next-redux-wrapper';
 
 import makeStore from '../store/store';
-import { updateAuthDataLoaded } from '../store/actions';
+import { updateAuthDataLoaded } from '../store/actions/user';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {

@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { updateFilter } from '../../store/actions';
+import { updateFilter } from '../../store/actions/search';
 import RadioButton from '../RadioButton';
 import { searchRadioButtons } from './styles';
 

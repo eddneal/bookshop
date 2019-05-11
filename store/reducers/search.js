@@ -1,4 +1,4 @@
-import { stateDefaults } from '../actions';
+import { stateDefaults } from '../actions/search';
 
 const search = (state = stateDefaults, action) => {
   switch (action.type) {

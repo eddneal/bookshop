@@ -21,7 +21,7 @@ import {
   updatePerPage,
   updateStartIndex,
   setLoading
-} from '../store/actions';
+} from '../store/actions/search';
 
 class Search extends Component {
   static async getInitialProps({ store, req, res, query }) {
