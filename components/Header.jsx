@@ -22,6 +22,14 @@ export const navItems = [
   },
 ];
 
+const linkStyles = css`
+  color: teal;
+  cursor: pointer;
+  &:hover {
+    color: black;
+  }
+`;
+
 class Header extends React.Component {
   static handleLogin() {
     firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
@@ -86,15 +94,28 @@ class Header extends React.Component {
                   css={css`align-self: center!important; height: 100%;`}
                 >
                   <Link route={item.route}>
-                    <a css={css`color: teal;`}>{item.name}</a>
+                    <a css={linkStyles}>{item.name}</a>
                   </Link>
                 </Menu.Item>
               ))}
-              <Menu.Item>
+              <Menu.Item
+                color="teal"
+                css={css`align-self: center!important; height: 100%;`}
+              >
                 {user ? (
-                  <button onClick={Header.handleLogout}>Logout</button>
+                  <span
+                    css={linkStyles}
+                    onClick={Header.handleLogout}
+                  >
+                    Logout
+                  </span>
                 ) : (
-                  <button onClick={Header.handleLogin}>Login</button>
+                  <span
+                    css={linkStyles}
+                    onClick={Header.handleLogin}
+                  >
+                    Login
+                  </span>
                 )}
               </Menu.Item>
             </Menu.Menu>
