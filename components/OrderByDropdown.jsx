@@ -39,7 +39,7 @@ OrderByDropdown.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  orderBy: state.orderBy,
+  orderBy: state.search.orderBy,
 });
 
 export default connect(mapStateToProps)(OrderByDropdown);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Pagination } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 const SearchPagination = ({ searchHandler, totalItems, perPage, startIndex }) => {
   const totalPages = Math.ceil(totalItems / perPage);
@@ -26,10 +27,17 @@ const SearchPagination = ({ searchHandler, totalItems, perPage, startIndex }) =>
   );
 };
 
+SearchPagination.propTypes = {
+  totalItems: PropTypes.number.isRequired,
+  perPage: PropTypes.number.isRequired,
+  startIndex: PropTypes.number.isRequired,
+  searchHandler: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = state => ({
-  totalItems: state.totalItems,
-  perPage: state.perPage,
-  startIndex: state.startIndex,
+  totalItems: state.search.totalItems,
+  perPage: state.search.perPage,
+  startIndex: state.search.startIndex,
 });
 
 export default connect(mapStateToProps)(SearchPagination);

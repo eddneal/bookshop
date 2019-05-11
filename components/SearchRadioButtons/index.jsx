@@ -40,7 +40,7 @@ const Index = ({ filter, handleSetFilter }) => {
 };
 
 const mapStateToProps = state => ({
-  filter: state.filter,
+  filter: state.search.filter,
 });
 
 const mapDispatchToProps = dispatch => ({

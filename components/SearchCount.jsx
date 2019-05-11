@@ -20,7 +20,7 @@ const SearchCount = ({ totalItems }) => (
 );
 
 const mapStateToProps = state => ({
-  totalItems: state.totalItems,
+  totalItems: state.search.totalItems,
 });
 
 SearchCount.propTypes = {

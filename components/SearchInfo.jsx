@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Icon, Label } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
-import { Router } from '../routes/routes';
 import { convertKeywordsStringToObject, removeKeyword } from '../utils';
 import SearchCount from './SearchCount';
 
@@ -37,7 +36,7 @@ SearchInfo.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  keyword: state.keyword,
+  keyword: state.search.keyword,
 });
 
 export default connect(mapStateToProps)(SearchInfo);

@@ -66,7 +66,7 @@ searchInput.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  keyword: state.keyword,
+  keyword: state.search.keyword,
 });
 
 export default connect(mapStateToProps)(searchInput);

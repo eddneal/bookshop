@@ -24,10 +24,6 @@ import {
 } from '../store/actions';
 
 class Search extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   static async getInitialProps({ store, req, res, query }) {
     const typeCastQuery = shallowParseInts(stateDefaults, query);
     const { keyword, perPage, orderBy, filter, startIndex } = Object.assign(stateDefaults, typeCastQuery);
@@ -41,6 +37,10 @@ class Search extends Component {
           orderBy})
         )
       : store.dispatch(clearSearch());
+  }
+
+  constructor(props) {
+    super(props);
   }
 
   handleSearch = (newSearchValue) => {

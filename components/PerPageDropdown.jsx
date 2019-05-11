@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Dropdown } from 'semantic-ui-react';
-import { Router } from '../routes/routes';
 
 const perPageOptions = [
   {
@@ -41,7 +40,7 @@ PerPageDropdown.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  perPage: state.perPage,
+  perPage: state.search.perPage,
 });
 
 export default connect(mapStateToProps)(PerPageDropdown);

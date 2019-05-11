@@ -63,3 +63,8 @@ export const updateOrderBy = (orderBy = 'relevance') => ({
   type: 'ORDER_BY_UPDATED',
   orderBy,
 });
+
+export const updateAuthDataLoaded = (authData = null) => ({
+  type: 'AUTH_DATA_LOADED',
+  authData,
+});

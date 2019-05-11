@@ -37,14 +37,14 @@ const Index = ({ items, keyword, loading }) => (
 Index.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   keyword: PropTypes.string.isRequired,
-  loading: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
-  items: state.items,
-  keyword: state.keyword,
-  totalItems: state.totalItems,
-  loading: state.loading,
+  items: state.search.items,
+  keyword: state.search.keyword,
+  totalItems: state.search.totalItems,
+  loading: state.search.loading,
 });
 
 export default connect(mapStateToProps)(Index);

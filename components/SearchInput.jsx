@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Input, Button, Select } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { Router } from '../routes/routes';
 import { addKeyword } from '../utils';
 
 class SearchInput extends React.Component {
@@ -72,7 +71,7 @@ SearchInput.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  keyword: state.keyword,
+  keyword: state.search.keyword,
 });
 
 export default connect(mapStateToProps)(SearchInput);
