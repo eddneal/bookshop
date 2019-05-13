@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -31,20 +31,19 @@ const linkStyles = css`
   }
 `;
 
-class Header extends React.Component {
-  static handleLogin() {
+const Header = ({ page, updateAuthData, authData }) => {
+  const handleLogin = () => {
     firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
-  }
+  };
 
-  static handleLogout() {
+  const handleLogout = () => {
     firebase.auth().signOut();
-  }
+  };
 
-  componentDidMount() {
-    firebase.initializeApp(clientCredentials);
+  useEffect(() => {
+    const firebaseApp = firebase.initializeApp(clientCredentials);
 
     firebase.auth().onAuthStateChanged((authData) => {
-      const { updateAuthData } = this.props;
       if (authData) {
         updateAuthData(authData);
         return authData
@@ -62,70 +61,77 @@ class Header extends React.Component {
         credential: 'same-origin',
       });
     });
-  }
 
-  render() {
-    const { page, user } = this.props;
-    return (
-      <header>
-        <nav>
-          <Menu pointing secondary>
-            <Menu.Item>
-              <Link route="index">
-                <a css={css`display: inline-flex;`}>
-                  <Logo css={css`width: 24px; height: 34px;`} />
-                </a>
-              </Link>
-            </Menu.Item>
-            <Menu.Menu position="right">
-              {navItems.map(item => (
-                <Menu.Item
-                  active={page === item.name}
-                  key={item.name}
-                  color="teal"
-                  css={css`align-self: center!important; height: 100%;`}
-                >
-                  <Link route={item.route}>
-                    <a css={linkStyles}>{item.name}</a>
-                  </Link>
-                </Menu.Item>
-              ))}
+    return () => {
+      firebaseApp.delete()
+        .then(() => {
+          console.log('App deleted successfully');
+        })
+        .catch((error) => {
+          console.log('Error deleting app:', error);
+        });
+    };
+  }, []);
+
+  return (
+    <header>
+      <nav>
+        <Menu pointing secondary>
+          <Menu.Item>
+            <Link route="index">
+              <a css={css`display: inline-flex;`}>
+                <Logo css={css`width: 24px; height: 34px;`} />
+              </a>
+            </Link>
+          </Menu.Item>
+          <Menu.Menu position="right">
+            {navItems.map(item => (
               <Menu.Item
+                active={page === item.name}
+                key={item.name}
                 color="teal"
                 css={css`align-self: center!important; height: 100%;`}
               >
-                {user ? (
-                  <span
-                    css={linkStyles}
-                    onClick={Header.handleLogout}
-                  >
-                    Logout
-                  </span>
-                ) : (
-                  <span
-                    css={linkStyles}
-                    onClick={Header.handleLogin}
-                  >
-                    Login
-                  </span>
-                )}
+                <Link route={item.route}>
+                  <a css={linkStyles}>{item.name}</a>
+                </Link>
               </Menu.Item>
-            </Menu.Menu>
-          </Menu>
-        </nav>
-      </header>
-    );
-  }
-}
+            ))}
+            <Menu.Item
+              color="teal"
+              css={css`align-self: center!important; height: 100%;`}
+            >
+              {authData ? (
+                <span
+                  css={linkStyles}
+                  onClick={handleLogout}
+                >
+                  Logout
+                </span>
+              ) : (
+                <span
+                  css={linkStyles}
+                  onClick={handleLogin}
+                >
+                  Login
+                </span>
+              )}
+            </Menu.Item>
+          </Menu.Menu>
+        </Menu>
+      </nav>
+    </header>
+  );
+};
 
 Header.propTypes = {
   page: PropTypes.string.isRequired,
-  user: PropTypes.object,
+  authData: PropTypes.object,
   updateAuthData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  user: state.user.authData,
+  authData: state.user.authData,
 });
 
 const mapDispatchToProps = dispatch => ({
