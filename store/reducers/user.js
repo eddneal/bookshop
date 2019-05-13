@@ -1,6 +1,6 @@
 const user = (state = { authData: null }, action) => {
   switch (action.type) {
-    case 'AUTH_DATA_LOADED':
+    case 'SET_AUTH_DATA':
       return { ...state, authData: action.authData };
     default:
       return state;

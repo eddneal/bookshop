@@ -10,6 +10,7 @@ import 'isomorphic-unfetch';
 import Logo from '../static/logo.svg';
 import { Link } from '../routes/routes';
 import clientCredentials from '../authCredentials/client';
+import { setAuthData } from '../store/actions/user';
 
 export const navItems = [
   {
@@ -39,22 +40,14 @@ class Header extends React.Component {
     firebase.auth().signOut();
   }
 
-  constructor(props) {
-    super(props);
-
-    const { user } = this.props;
-    this.state = {
-      user,
-    };
-  }
-
   componentDidMount() {
     firebase.initializeApp(clientCredentials);
 
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ user });
-        return user
+    firebase.auth().onAuthStateChanged((authData) => {
+      const { updateAuthData } = this.props;
+      if (authData) {
+        updateAuthData(authData);
+        return authData
           .getIdToken()
           .then(token => fetch('/api/login', {
             method: 'POST',
@@ -63,7 +56,7 @@ class Header extends React.Component {
             body: JSON.stringify({ token }),
           }));
       }
-      this.setState({ user: null });
+      updateAuthData(null);
       fetch('api/logout', {
         method: 'POST',
         credential: 'same-origin',
@@ -72,8 +65,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const { user } = this.state;
-    const { page } = this.props;
+    const { page, user } = this.props;
     return (
       <header>
         <nav>
@@ -129,10 +121,15 @@ class Header extends React.Component {
 Header.propTypes = {
   page: PropTypes.string.isRequired,
   user: PropTypes.object,
+  updateAuthData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   user: state.user.authData,
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+  updateAuthData: authData => dispatch(setAuthData(authData)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -4,14 +4,14 @@ import App, { Container } from 'next/app';
 import withRedux from 'next-redux-wrapper';
 
 import makeStore from '../store/store';
-import { updateAuthDataLoaded } from '../store/actions/user';
+import { setAuthData } from '../store/actions/user';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
 
     const user = ctx.req && ctx.req.session ? ctx.req.session.decodedToken : null;
-    ctx.store.dispatch(updateAuthDataLoaded(user));
+    ctx.store.dispatch(setAuthData(user));
 
     return { pageProps };
   }
