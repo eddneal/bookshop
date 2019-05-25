@@ -20,7 +20,7 @@ import {
   updateOrderBy,
   updatePerPage,
   updateStartIndex,
-  setLoading
+  updateLoading
 } from '../store/actions/search';
 
 class Search extends Component {
@@ -132,7 +132,7 @@ const mapDispatchToProps = dispatch => ({
   dispatchPerPage(perPage) { dispatch(updatePerPage(perPage))},
   dispatchFilter(filter) { dispatch(updateFilter(filter))},
   dispatchOrderBy(orderBy) { dispatch(updateOrderBy(orderBy))},
-  dispatchSetLoading() { dispatch(setLoading())},
+  dispatchSetLoading() { dispatch(updateLoading())},
   dispatchStartIndex(startIndex) { dispatch(updateStartIndex(startIndex))}
 });
 

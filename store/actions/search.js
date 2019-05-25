@@ -18,7 +18,7 @@ export const loadItems = ({ items = [], totalItems = 0, loading = false }) => ({
   loading,
 });
 
-export const setLoading = (loading = true) => ({
+export const updateLoading = (loading = true) => ({
   type: 'SET_LOADING',
   items: [],
   loading,
@@ -63,3 +63,16 @@ export const updateOrderBy = (orderBy = 'relevance') => ({
   type: 'ORDER_BY_UPDATED',
   orderBy,
 });
+
+export default {
+  stateDefaults,
+  loadItems,
+  updateLoading,
+  handleLoadItems,
+  updateKeyword,
+  updatePerPage,
+  updateStartIndex,
+  clearSearch,
+  updateFilter,
+  updateOrderBy,
+};
