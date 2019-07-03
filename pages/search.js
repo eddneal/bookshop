@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { css } from '@emotion/core';
 import { Router } from '../routes/routes';
 import Layout from '../components/Layout';
@@ -10,17 +9,12 @@ import OrderByDropdown from '../components/OrderByDropdown';
 import SearchRadioButtons from '../components/SearchRadioButtons/index';
 import SearchInfo from '../components/SearchInfo';
 import SearchPagination from '../components/SearchPagination';
-import { shallowParseInts } from "../utils";
+import withSearchRoute from '../components/withSearchRoute';
+import { shallowParseInts } from '../utils';
 import {
   stateDefaults,
   handleLoadItems,
   clearSearch,
-  updateFilter,
-  updateKeyword,
-  updateOrderBy,
-  updatePerPage,
-  updateStartIndex,
-  updateLoading
 } from '../store/actions/search';
 
 class Search extends Component {
@@ -30,34 +24,25 @@ class Search extends Component {
 
     return (query.keyword)
       ? store.dispatch(handleLoadItems({
-          keyword: decodeURI(keyword),
-          perPage,
-          startIndex,
-          filter,
-          orderBy})
-        )
+        keyword: decodeURI(keyword),
+        perPage,
+        startIndex,
+        filter,
+        orderBy,
+      }))
       : store.dispatch(clearSearch());
   }
 
-  constructor(props) {
-    super(props);
-  }
-
-  handleSearch = (newSearchValue) => {
-    const { keyword, perPage, orderBy, filter, startIndex, dispatchSetLoading } = this.props;
-    const [key, value] = Object.entries(newSearchValue)[0];
-    const dispatchFunction = `dispatch${key.charAt(0).toUpperCase()}${key.slice(1)}`;
-    const newSearchParams = {keyword, perPage, orderBy, filter, startIndex, ...newSearchValue};
-
-    dispatchSetLoading();
-    this.props[dispatchFunction](value);
-    Router.pushRoute('search', newSearchParams.keyword ? newSearchParams : {});
-  };
-
   render() {
+    const SearchInputWithSearchRoute = withSearchRoute(SearchInput);
+    const PerPageDropdownWithSearchRoute = withSearchRoute(PerPageDropdown);
+    const OrderByDropdownWithSearchRoute = withSearchRoute(OrderByDropdown);
+    const SearchInfoWithSearchRoute = withSearchRoute(SearchInfo);
+    const SearchPaginationWithSearchRoute = withSearchRoute(SearchPagination);
+
     return (
       <Layout page="Search">
-        <SearchInput searchHandler={this.handleSearch} />
+        <SearchInputWithSearchRoute />
         <div css={css`
           display: flex;
           flex-direction: column;
@@ -85,7 +70,7 @@ class Search extends Component {
               }
             `}>
 
-              <PerPageDropdown searchHandler={this.handleSearch} />
+              <PerPageDropdownWithSearchRoute />
             </div>
             <div css={css`
               flex: 1 1;
@@ -93,7 +78,7 @@ class Search extends Component {
                 min-width:110px
               }
             `}>
-              <OrderByDropdown searchHandler={this.handleSearch} />
+              <OrderByDropdownWithSearchRoute />
             </div>
           </div>
         </div>
@@ -106,11 +91,11 @@ class Search extends Component {
             align-items: center;
           }
         `}>
-          <SearchInfo searchHandler={this.handleSearch} />
+          <SearchInfoWithSearchRoute />
           <div css={css`
           margin-left: auto;
         `}>
-            <SearchPagination searchHandler={this.handleSearch} />
+            <SearchPaginationWithSearchRoute />
           </div>
         </div>
         <SearchResults />
@@ -119,21 +104,4 @@ class Search extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  keyword: state.keyword,
-  perPage: state.perPage,
-  orderBy: state.orderBy,
-  filter: state.filter,
-  startIndex: state.startIndex,
-});
-
-const mapDispatchToProps = dispatch => ({
-  dispatchKeyword(keyword) { dispatch(updateKeyword(keyword))},
-  dispatchPerPage(perPage) { dispatch(updatePerPage(perPage))},
-  dispatchFilter(filter) { dispatch(updateFilter(filter))},
-  dispatchOrderBy(orderBy) { dispatch(updateOrderBy(orderBy))},
-  dispatchSetLoading() { dispatch(updateLoading())},
-  dispatchStartIndex(startIndex) { dispatch(updateStartIndex(startIndex))}
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default Search;
