@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Dropdown } from 'semantic-ui-react';
-import { Router } from '../routes/routes';
+import { updateOrderBy } from '../store/actions/search';
+
 
 const orderByOptions = [
   {
@@ -15,8 +16,9 @@ const orderByOptions = [
   },
 ];
 
-const OrderByDropdown = ({ orderBy, searchHandler }) => {
+const OrderByDropdown = ({ searchHandler, dispatchOrderBy, orderBy }) => {
   const onChangeHandler = (event, data) => {
+    dispatchOrderBy(data.value);
     searchHandler({ orderBy: data.value });
   };
 
@@ -34,12 +36,17 @@ const OrderByDropdown = ({ orderBy, searchHandler }) => {
 };
 
 OrderByDropdown.propTypes = {
-  orderBy: PropTypes.string.isRequired,
   searchHandler: PropTypes.func.isRequired,
+  orderBy: PropTypes.string.isRequired,
+  dispatchOrderBy: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   orderBy: state.search.orderBy,
 });
 
-export default connect(mapStateToProps)(OrderByDropdown);
+const mapDispatchToProps = dispatch => ({
+  dispatchOrderBy(orderBy) { dispatch(updateOrderBy(orderBy)); },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderByDropdown);

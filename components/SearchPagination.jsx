@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import { Pagination } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-const SearchPagination = ({ searchHandler, totalItems, perPage, startIndex }) => {
+import {
+  updateStartIndex,
+} from '../store/actions/search';
+
+const SearchPagination = ({ searchHandler, totalItems, perPage, startIndex, dispatchStartIndex }) => {
   const totalPages = Math.ceil(totalItems / perPage);
   const defaultActivePage = startIndex !== 0
     ? Math.ceil(startIndex / perPage)
@@ -12,6 +16,7 @@ const SearchPagination = ({ searchHandler, totalItems, perPage, startIndex }) =>
     const newIndex = data.activePage !== 1
       ? ((data.activePage - 1) * perPage) + 1
       : 0;
+    dispatchStartIndex(newIndex);
     searchHandler({ startIndex: newIndex });
   };
 
@@ -28,10 +33,11 @@ const SearchPagination = ({ searchHandler, totalItems, perPage, startIndex }) =>
 };
 
 SearchPagination.propTypes = {
+  searchHandler: PropTypes.func.isRequired,
   totalItems: PropTypes.number.isRequired,
   perPage: PropTypes.number.isRequired,
   startIndex: PropTypes.number.isRequired,
-  searchHandler: PropTypes.func.isRequired,
+  dispatchStartIndex: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -40,4 +46,8 @@ const mapStateToProps = state => ({
   startIndex: state.search.startIndex,
 });
 
-export default connect(mapStateToProps)(SearchPagination);
+const mapDispatchToProps = dispatch => ({
+  dispatchStartIndex(startIndex) { dispatch(updateStartIndex(startIndex)); },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPagination);

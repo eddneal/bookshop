@@ -4,13 +4,16 @@ import { Input, Button, Select } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { addKeyword } from '../utils';
+import { updateKeyword } from '../store/actions/search';
 
-const searchInput = ({ keyword, searchHandler }) => {
+const searchInput = ({ searchHandler, keyword, dispatchKeyword }) => {
   const [inputText, setInputText] = useState('');
   const [keywordOption, setKeywordOption] = useState('keyword');
 
   const searchInputHandler = () => {
-    searchHandler({ keyword: addKeyword(keyword, { [keywordOption]: inputText }) });
+    const newKeyword = addKeyword(keyword, { [keywordOption]: inputText });
+    dispatchKeyword(newKeyword);
+    searchHandler({ keyword: newKeyword });
   };
 
   const enterKeyUpHandler = (e) => {
@@ -61,12 +64,17 @@ const searchInput = ({ keyword, searchHandler }) => {
 };
 
 searchInput.propTypes = {
-  keyword: PropTypes.string.isRequired,
   searchHandler: PropTypes.func.isRequired,
+  keyword: PropTypes.string.isRequired,
+  dispatchKeyword: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   keyword: state.search.keyword,
 });
 
-export default connect(mapStateToProps)(searchInput);
+const mapDispatchToProps = dispatch => ({
+  dispatchKeyword(keyword) { dispatch(updateKeyword(keyword)); },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(searchInput);

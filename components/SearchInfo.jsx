@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import { convertKeywordsStringToObject, removeKeyword } from '../utils';
 import SearchCount from './SearchCount';
+import { updateKeyword } from '../store/actions/search';
 
-const SearchInfo = ({ keyword, searchHandler }) => {
+const SearchInfo = ({ searchHandler, keyword, dispatchKeyword }) => {
   const keywords = convertKeywordsStringToObject(keyword);
   return (
     <div>
@@ -22,7 +23,11 @@ const SearchInfo = ({ keyword, searchHandler }) => {
         {term[0] === 'keyword' ? `${term[1]}` : `${term[0]}:${term[1]}`}
         <Icon
           name="delete"
-          onClick={() => searchHandler({ keyword: removeKeyword(keyword, term[0]) })}
+          onClick={() => {
+            const newKeyword = removeKeyword(keyword, term[0]);
+            dispatchKeyword(newKeyword);
+            searchHandler({ keyword: newKeyword });
+          }}
         />
       </Label>
       ))}
@@ -31,12 +36,17 @@ const SearchInfo = ({ keyword, searchHandler }) => {
 };
 
 SearchInfo.propTypes = {
-  keyword: PropTypes.string.isRequired,
   searchHandler: PropTypes.func.isRequired,
+  keyword: PropTypes.string.isRequired,
+  dispatchKeyword: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   keyword: state.search.keyword,
 });
 
-export default connect(mapStateToProps)(SearchInfo);
+const mapDispatchToProps = dispatch => ({
+  dispatchKeyword(keyword) { dispatch(updateKeyword(keyword)); },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchInfo);

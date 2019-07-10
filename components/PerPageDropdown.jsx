@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Dropdown } from 'semantic-ui-react';
+import { updatePerPage } from '../store/actions/search';
 
 const perPageOptions = [
   {
@@ -18,8 +19,9 @@ const perPageOptions = [
   },
 ];
 
-const PerPageDropdown = ({ perPage, searchHandler }) => {
+const PerPageDropdown = ({ searchHandler, perPage, dispatchPerPage }) => {
   const onChangeHandler = (event, data) => {
+    dispatchPerPage(data.value);
     searchHandler({ perPage: data.value });
   };
 
@@ -35,12 +37,17 @@ const PerPageDropdown = ({ perPage, searchHandler }) => {
 };
 
 PerPageDropdown.propTypes = {
-  perPage: PropTypes.number.isRequired,
   searchHandler: PropTypes.func.isRequired,
+  perPage: PropTypes.number.isRequired,
+  dispatchPerPage: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   perPage: state.search.perPage,
 });
 
-export default connect(mapStateToProps)(PerPageDropdown);
+const mapDispatchToProps = dispatch => ({
+  dispatchPerPage(perPage) { dispatch(updatePerPage(perPage)); },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PerPageDropdown);
